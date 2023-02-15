@@ -133,21 +133,21 @@ def plan_klikniecia_wycinanie(wspolrzedne):
     odswiez_wycinanie()
     if okno_wycinanie:
         kliknij_w_oknie(okno_wycinanie, wspolrzedne)
-        print(f'Klik - {wspolrzedne}\n')
+        print(f'Współrzędne przycisku od głównego okna - {wspolrzedne}\n')
     else:
         otwarcie_wycinania()
         kliknij_w_oknie(okno_wycinanie, wspolrzedne)
-        print(f'Klik - {wspolrzedne}\n')
+        print(f'Współrzędne przycisku od głównego okna - {wspolrzedne}\n')
 
 def plan_klikniecia_sterowanie(wspolrzedne):
     odswiez_sterowanie()
     if okno_sterowanie:
         kliknij_w_oknie(okno_sterowanie, wspolrzedne)
-        print(f'Klik - {wspolrzedne}\n')
+        print(f'Współrzędne przycisku od głównego okna - {wspolrzedne}\n')
     else:
         otwarcie_sterowania()
         kliknij_w_oknie(okno_sterowanie, wspolrzedne)
-        print(f'Klik - {wspolrzedne}\n')
+        print(f'Współrzędne przycisku od głównego okna - {wspolrzedne}\n')
 
 def kliknij(zdjecie):
     # 'confidence' przyjmuje liczbe od 0-1. Jest to dokładność znajdowanego obrazu. Np. przy 0.6 znajduje nieprawidłowe przyciski.
@@ -173,12 +173,14 @@ def kliknij_w_oknie(okno, przycisk):
     try:
         wspolrzedne = okno.left + przycisk[0], okno.top + przycisk[1]
         pyautogui.click(wspolrzedne)
-        print(f'Klik: {wspolrzedne}')
     except AttributeError as error:
         print(f'Błąd: {error}')
+    else:
+        czas_stop = time.time()
+        print(f'Klik: {wspolrzedne}')
+        print(f'Czas kliknięcia współrzędnych: {czas_stop - czas_start}')
 
-    czas_stop = time.time()
-    print(f'Czas kliknięcia współrzędnych: {czas_stop - czas_start}')
+
 
 def akcja(klawisz):
     if klawisz == keyboard.Key.f13:
